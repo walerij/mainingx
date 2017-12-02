@@ -17,7 +17,7 @@ class m171202_165701_create_paymenthistory_table extends Migration
             'id' => $this->primaryKey(),
             'user_id'=>$this->integer(),
             'date_pay'=>$this->dateTime(),
-            ''
+            'sum_pay'=>$this->float()
         ]);
     }
 
