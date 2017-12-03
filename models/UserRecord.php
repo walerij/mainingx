@@ -8,13 +8,18 @@ class UserRecord extends ActiveRecord{
         return "user";
     }
 
+    public function getEarnings()
+    {
+        return $this->hasOne(EarningsRecord::className(),['user_id'=>'id']);
+    }
+
+
     public function setUserAddForm($userJoinForm)
     {
         $this->login=$userJoinForm->login;
         $this->setPassword($userJoinForm->password);
         $this->cashetype=$userJoinForm->cashetype;
         $this->cashenumber=$userJoinForm->cashenumber;
-
     }
 
     public function setPassword($password)

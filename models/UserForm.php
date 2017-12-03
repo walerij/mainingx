@@ -1,6 +1,8 @@
 <?php
 namespace  app\models;
 
+use yii\base\Model;
+
 class UserForm extends Model{
     public $email;
     public $password;
@@ -10,7 +12,7 @@ class UserForm extends Model{
     public function rules()
     {
         return [
-            [['email','password','casheptype','cashenumber'],'required','message'=>'Поле не должно быть пустым'],
+            [['email','password','cashetype','cashenumber'],'required','message'=>'Поле не должно быть пустым'],
             ['email','email','message'=>'это не email']
         ];
     }

@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\UserForm;
 
 class SiteController extends Controller
 {
@@ -122,5 +123,16 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+/*
+ * добавление пользователя
+ * */
+    public function actionAdduser()
+    {
+        if (Yii::$app->request->isPost)
+            return $this->addUserPost();
+        $userAdd = new UserForm();
+        return $this->render('user\adduser', ['AddUser' => $userAdd]);
     }
 }
