@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\EarningsForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -10,6 +11,9 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\UserForm;
+use app\models\UserRecord;
+use app\models\EarningsRecord;
+
 
 class SiteController extends Controller
 {
@@ -135,4 +139,32 @@ class SiteController extends Controller
         $userAdd = new UserForm();
         return $this->render('user\adduser', ['AddUser' => $userAdd]);
     }
+
+    private function addUserPost()
+    {
+        $userAdd = new UserForm();
+        if ($userAdd->load(Yii::$app->request->post()))
+            if ($userAdd->validate()) {
+                $userRecord = new UserRecord();//идет добавление пользователя
+                $userRecord->setUserAddForm($userAdd);
+                $userRecord->save();
+                $earningsRecords = new EarningsForm();
+                $earningsRecords->addEarning($userRecord);
+                $earningsRecords->save();
+
+                //return $this->render('user\usersuccess',
+                  //  ['AddUser'=>$userRecord]
+                //);
+                return $this->redirect('/site/usersuccess/');
+            }
+    }
+
+    public function actionUsersuccess()
+    {
+        $userEarning =  UserRecord::find()->where(['email' => 'klimova_elena@ogo.ru'])->all();
+        return $this->render('user\usersuccess', ['AddUser' => $userEarning]);
+
+    }
+
+
 }

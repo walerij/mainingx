@@ -10,6 +10,8 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $authKey;
     public $accessToken;
 
+    private $userRecord;
+
     private static $users = [
         '100' => [
             'id' => '100',
@@ -100,5 +102,15 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+
+    public function login()
+    {
+        if($this->hasErrors())     return;
+
+        $userIdentity = UserIdentity::findIdentity($this->userRecord->id);
+        Yii::$app->user->login($userIdentity,
+            $this->remember?3600*24*30:0  );
     }
 }

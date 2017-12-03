@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 use yii\db\ActiveRecord;
+use yii;
 
 class UserRecord extends ActiveRecord{
     public static function tableName()
@@ -16,7 +17,7 @@ class UserRecord extends ActiveRecord{
 
     public function setUserAddForm($userJoinForm)
     {
-        $this->login=$userJoinForm->login;
+        $this->email=$userJoinForm->email;
         $this->setPassword($userJoinForm->password);
         $this->cashetype=$userJoinForm->cashetype;
         $this->cashenumber=$userJoinForm->cashenumber;
@@ -25,6 +26,7 @@ class UserRecord extends ActiveRecord{
     public function setPassword($password)
     {
         $this->password=Yii::$app->security->generatePasswordHash($password);
+        //Yii::$app->security->generatePasswordHash($password);
         //  $this->authokey=Yii::$app->security->generateRandomString(100);
     }
 
