@@ -13,7 +13,8 @@ use app\models\ContactForm;
 use app\models\UserForm;
 use app\models\UserRecord;
 use app\models\EarningsRecord;
-
+use app\models\PaymentForm;
+use app\models\PaymentRecord;
 
 class SiteController extends Controller
 {
@@ -185,8 +186,11 @@ class SiteController extends Controller
     public function actionAddpayment()
     {
         $_id =  Yii::$app->request->get('id');
-        //$payment =
-        return $this->render('payment\addpayment', ['payment' => $userEarning]);
+        $payment = new \app\models\PaymentForm();
+        $payment->user_id = $_id;
+        return $this->render('payment\addpayment',
+                ['payment' => $payment]
+                );
     }
 
 }

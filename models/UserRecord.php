@@ -14,6 +14,11 @@ class UserRecord extends ActiveRecord{
         return $this->hasOne(EarningsRecord::className(),['user_id'=>'id']);
     }
 
+    
+    public function getPayment()
+    {
+        return $this->hasMany(PaymentRecord::className(),['user_id'=>'id']);
+    }
 
     public function setUserAddForm($userJoinForm)
     {

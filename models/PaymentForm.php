@@ -2,6 +2,8 @@
 
  namespace app\models;
  
+ use yii\base\Model;
+ 
  class PaymentForm extends Model{
      public $user_id;
      public $date_pay;
