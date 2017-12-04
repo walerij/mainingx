@@ -40,7 +40,7 @@ AppAsset::register($this);
             
             ['label' => 'Добавить пользователя', 'url' => ['/site/adduser']],
             ['label' => 'Счет', 'url' => ['/site/userearning']],
-            ['label' => 'История платежей', 'url' => ['/site/paimenthistory']],
+            ['label' => 'История платежей', 'url' => ['/site/paymenthistory']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Вход', 'url' => ['/site/login']]
             ) : (

@@ -178,7 +178,7 @@ class SiteController extends Controller
     {
         $userEarning =  UserRecord::find()->all()
                 ;
-        return $this->render('user\userearning', ['AddUser' => $userEarning]);
+        return $this->render('payment\paymenthistory', ['AddUser' => $userEarning]);
 
     }
 
