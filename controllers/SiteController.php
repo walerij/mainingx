@@ -176,10 +176,17 @@ class SiteController extends Controller
     
     public function actionPaymenthistory()
     {
-        $userEarning =  UserRecord::find()->all()
-                ;
+        $userEarning =  UserRecord::find()
+                ->all()                ;
         return $this->render('payment\paymenthistory', ['AddUser' => $userEarning]);
 
+    }
+    
+    public function actionAddpayment()
+    {
+        $_id =  Yii::$app->request->get('id');
+        //$payment =
+        return $this->render('payment\addpayment', ['payment' => $userEarning]);
     }
 
 }
