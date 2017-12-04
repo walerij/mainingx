@@ -185,12 +185,26 @@ class SiteController extends Controller
     
     public function actionAddpayment()
     {
+         if (Yii::$app->request->isPost)
+            return $this->addPaymentPost();
         $_id =  Yii::$app->request->get('id');
-        $payment = new \app\models\PaymentForm();
+        $payment = new PaymentForm();
         $payment->user_id = $_id;
         return $this->render('payment\addpayment',
                 ['payment' => $payment]
                 );
+    }
+
+    public function addPaymentPost() {
+        $paymentAdd = new PaymentForm();
+        if ($paymentAdd->load(Yii::$app->request->post()))
+            if ($paymentAdd->validate()) {
+                $paymentRecord = new PaymentRecord();//идет добавление пользователя
+               // $userRecord->setUserAddForm($userAdd);
+                $paymentRecord->setRecord($paymentAdd);
+                $paymentRecord->save();
+                return $this->redirect('/site/paymenthistory/');
+            }
     }
 
 }

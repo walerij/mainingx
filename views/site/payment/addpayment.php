@@ -1,19 +1,26 @@
-<?php 
-$this->title = 'Добавление платежа';
-$this->params['breadcrumbs'][] = $this->title;
-
-?>
-добавление платежа
 <?php
 
-foreach ($payment as $pay)
-{
-    echo '===='.$pay->user_id;
-}
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+$this->title = 'Добавление платежа';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+
+
+
+
+       <?php $form = ActiveForm::begin() ?>
+
+       <?= $form->field($payment, 'date_pay')->label('Дата платежа') ?>
+       <?= $form->field($payment, 'sum_pay')->label('Сумма платежа') ?>
+       <button class="btn btn-success" type="submit">
+           <i class="glyphicon glyphicon-ok"></i>
+           Сохранить платеж
+       </button>
+       <?= $form->field($payment, 'user_id')->hiddenInput()->label('') ?>
+       <? ActiveForm::end() ?>
+
+
 
