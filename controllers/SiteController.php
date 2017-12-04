@@ -190,6 +190,7 @@ class SiteController extends Controller
         $_id =  Yii::$app->request->get('id');
         $payment = new PaymentForm();
         $payment->user_id = $_id;
+        $payment->date_pay = date('Y-m-d H:i:s');
         return $this->render('payment\addpayment',
                 ['payment' => $payment]
                 );
