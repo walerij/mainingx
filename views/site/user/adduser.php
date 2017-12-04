@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = 'Add new user';
+$this->title = 'Регистрация пользователя';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

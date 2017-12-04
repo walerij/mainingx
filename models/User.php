@@ -1,8 +1,10 @@
 <?php
 
 namespace app\models;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     public $id;
     public $username;
@@ -12,7 +14,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
     private $userRecord;
 
-    private static $users = [
+   /* private static $users = [
         '100' => [
             'id' => '100',
             'username' => 'admin',
@@ -29,27 +31,39 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         ],
     ];
 
-
+*/
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    
+    public static function tableName()
+    {
+        return 'user';
+    }
+
+      public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+    
+   /* public static function findIdentity($id)
     {
         return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
     }
-
+*/
     /**
      * @inheritdoc
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
+       /* foreach (self::$users as $user) {
             if ($user['accessToken'] === $token) {
                 return new static($user);
             }
         }
 
-        return null;
+        return null;*/
+         return static::findOne(['access_token' => $token]);
     }
 
     /**
@@ -58,15 +72,22 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username)
+    
+     public static function findUserByEmail($email)
     {
-        foreach (self::$users as $user) {
+        return  static::findOne(['email'=>$email]);
+
+    }
+   public static function findByUsername($username)
+    {
+        /*foreach (self::$users as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }
         }
 
-        return null;
+        return null;*/
+       return  static::findOne(['email'=>$username]);
     }
 
     /**
@@ -105,12 +126,12 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     }
 
 
-    public function login()
+    /*public function login()
     {
         if($this->hasErrors())     return;
 
         $userIdentity = UserIdentity::findIdentity($this->userRecord->id);
         Yii::$app->user->login($userIdentity,
             $this->remember?3600*24*30:0  );
-    }
+    }*/
 }
