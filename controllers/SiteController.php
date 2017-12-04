@@ -148,7 +148,7 @@ class SiteController extends Controller
                 $userRecord = new UserRecord();//идет добавление пользователя
                 $userRecord->setUserAddForm($userAdd);
                 $userRecord->save();
-                $earningsRecords = new EarningsForm();
+                $earningsRecords = new EarningsRecord();
                 $earningsRecords->addEarning($userRecord);
                 $earningsRecords->save();
 
@@ -161,10 +161,25 @@ class SiteController extends Controller
 
     public function actionUsersuccess()
     {
-        $userEarning =  UserRecord::find()->where(['email' => 'klimova_elena@ogo.ru'])->all();
+        $userEarning =  UserRecord::find()->all()
+                ;
         return $this->render('user\usersuccess', ['AddUser' => $userEarning]);
 
     }
+  public function actionUserearning()
+    {
+        $userEarning =  UserRecord::find()->all()
+                ;
+        return $this->render('user\userearning', ['AddUser' => $userEarning]);
 
+    }
+    
+    public function actionPaymenthistory()
+    {
+        $userEarning =  UserRecord::find()->all()
+                ;
+        return $this->render('user\userearning', ['AddUser' => $userEarning]);
+
+    }
 
 }
